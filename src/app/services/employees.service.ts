@@ -1,25 +1,29 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Employee } from '../models/employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
-  employees : Employee[];
+  //employees : Employee[];
+  private _url = '/assets/data/employees.json';
   constructor(private http: HttpClient) {
-    this.employees = [
-      {id: 1, name: 'Benjamin Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'},
-      {id: 2, name: 'Danny Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'},
-      {id: 1, name: 'Liora Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'}
-    ]
+    // this.employees = [
+    //   {id: 1, name: 'Benjamin Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'},
+    //   {id: 2, name: 'Danny Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'},
+    //   {id: 1, name: 'Liora Shapira', phone: '050-8296483', email: 'maale.conservatory.dir@gmail.com'}
+    // ]
   }
 
-  getAll(){
-    return this.employees;
+  getAll(): Observable<Employee[]> {
+    //return this.employees;
+    return this.http.get<Employee[]>(this._url);
   }
 
-  getById(id: number) {
-    return this.employees.find(employee => employee.id === id);
+  getByID(id:number):Observable<any>{
+    let url = `${this._url}/${id}`;
+    return this.http.get<Employee>(url);
   }
 }

@@ -1,8 +1,9 @@
 <div>
   <h1>Employees List</h1>
-  <div *ngFor="let employee of employees">
-    <h2>{{employee.name}}</h2>
-    <p>{{employee.email}}</p>
-    <p>{{employee.phone}}</p>
+  <div *ngFor="let employee of employees" (click)="showEmployee(employee)">
+    <p>{{employee.name}}</p>
   </div>
+  <!-- <div>
+    {{employeeOfTheMonth.name}}
+  </div> -->
 </div>
